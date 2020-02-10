@@ -11,6 +11,10 @@ class EventCalendar extends Component {
 
             <FullCalendar
                 defaultView="dayGridMonth" plugins={[ dayGridPlugin ]}
+                events={[
+                    {title: 'Start Group Project', date: '2020-02-10'},
+                    {title: 'Finish Group Project', date: '2020-02-21'}
+                ]}
             />
         )   
     }
