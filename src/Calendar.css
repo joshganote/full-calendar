@@ -1,0 +1,9 @@
+.task-button {
+    padding: 20px;
+    background-color: rgb(113, 238, 232);
+    text-align: right;
+}
+
+.calendar-container {
+    background-color: rgb(240, 125, 105);
+}
