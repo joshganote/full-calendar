@@ -10,10 +10,10 @@ import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
 import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
 
 
 // CSS
-import './App.css'
 import './Calendar.css'
 
 class EventCalendar extends Component {
@@ -33,12 +33,6 @@ class EventCalendar extends Component {
         });
     }
 
-    // eventModal = () => {
-    //     this.setState({
-    //         [open, setOpen]: false,
-    //     })
-    // }
-
     openNewEvent = (event) => {
         this.setState({
             setOpen: true,
@@ -47,6 +41,11 @@ class EventCalendar extends Component {
     closeNewEvent = (event) => {
         this.setState({
             setOpen: false,
+            eventName: '',
+            eventAddress: '',
+            eventTime: '',
+            eventDate: '',
+            eventNotes: '',
         })
     }
 
@@ -54,45 +53,62 @@ class EventCalendar extends Component {
         return (
             <div className="container">
                 <div className="task-button">
-                    <Button variant="contained" color="primary" onClick={this.openNewEvent}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={this.openNewEvent}
+                    >
                         Add Event
                     </Button>
                     <div className="event-modal">
-                        <Modal onClose={this.openNewEvent}>
+                        <Modal open={this.state.setOpen} onClose={this.closeNewEvent}>
                             <div className="modal-input">
                                 <h2>Create Event</h2>
                                 <form className="event-form">
-                                    <TextField variant="outlined"
-                                        type="text"
-                                        name="Event Name"
-                                        value={this.state.eventName}
-                                        onChange={this.handleInputField('eventName')}
-                                    />
-                                    <TextField variant="outlined"
-                                        type="text"
-                                        name="Address"
-                                        value={this.state.eventAddress}
-                                        onChange={this.handleInputField('eventAddress')}
-                                    />
-                                    <TextField variant="outlined"
-                                        type="text"
-                                        name="Time"
-                                        value={this.state.eventTime}
-                                        onChange={this.handleInputField('eventTime')}
-                                    />
-                                    <DatePicker
-                                        value={this.state.eventDate}
-                                        onChange={this.handleInputField('eventDate')}
-                                    />
-                                    <TextField variant="outlined"
-                                        type="text"
-                                        label="Multiline"
-                                        multiline
-                                        rowsMax="6"
-                                        value={this.state.eventNotes}
-                                        oonChange={this.handleInputField('eventNotes')}
-                                    />
+                                    <Grid container spacing={3}>
+                                        <Grid item xs={6}>
+                                            <div className="text-input">
+                                                <TextField variant="outlined"
+                                                    type="text"
+                                                    label="Event Name"
+                                                    value={this.state.eventName}
+                                                    onChange={this.handleInputField('eventName')}
+                                                />
+                                                <TextField variant="outlined"
+                                                    type="text"
+                                                    label="Address"
+                                                    value={this.state.eventAddress}
+                                                    onChange={this.handleInputField('eventAddress')}
+                                                />
+                                                <TextField variant="outlined"
+                                                    type="text"
+                                                    label="Time"
+                                                    value={this.state.eventTime}
+                                                    onChange={this.handleInputField('eventTime')}
+                                                />
+                                            </div>
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            <DatePicker
+                                                value={this.state.eventDate}
+                                                onChange={this.handleInputField('eventDate')}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                    <div className="notes-container">
+                                        <TextField variant="outlined" className="notes-box"
+                                            type="text"
+                                            label="Notes"
+                                            multiline
+                                            rowsMax="4"
+                                            value={this.state.eventNotes}
+                                            onChange={this.handleInputField('eventNotes')}
+                                        />
+                                    </div>
                                 </form>
+                                <button>
+                                    OK
+                                </button>
                             </div>
                         </Modal>
                     </div>
